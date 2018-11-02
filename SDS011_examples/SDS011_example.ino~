@@ -1,0 +1,22 @@
+#include <SDS011.h>
+
+float pm10,pm25;
+int error;
+
+SDS011 my_sds;
+
+void setup() {
+	my_sds.begin(5,6); //TX,RX
+	Serial.begin(9600);
+}
+
+void loop() {
+
+	
+	error = my_sds.read(&pm25,&pm10);
+	if (! error) {
+		Serial.println("P2.5: "+String(pm25));
+		Serial.println("P10:  "+String(pm10));
+	}
+	delay(100);
+}
